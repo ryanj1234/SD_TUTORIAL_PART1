@@ -1,5 +1,5 @@
-#include<avr/io.h>
-#include<util/delay.h>
+#include <avr/io.h>
+#include <util/delay.h>
 
 // pin definitions
 #define DDR_SPI         DDRB
@@ -14,9 +14,9 @@
 #define CS_DISABLE()    PORT_SPI |= (1 << CS)
 
 // command definitions
-#define CMD0        0
-#define CMD0_ARG    0x00000000
-#define CMD0_CRC    0x94
+#define CMD0            0
+#define CMD0_ARG        0x00000000
+#define CMD0_CRC        0x94
 
 // SPI functions
 void SPI_init(void);
@@ -51,7 +51,7 @@ void SPI_init()
     DDR_SPI |= (1 << MISO);
 
     // enable SPI, set as master, and clock to fosc/128
-	SPCR = (1 << SPE) | (1 << MSTR) | (1 << SPR1) | (1 << SPR0);
+    SPCR = (1 << SPE) | (1 << MSTR) | (1 << SPR1) | (1 << SPR0);
 }
 
 uint8_t SPI_transfer(uint8_t data)
@@ -74,12 +74,8 @@ void SD_powerUpSeq()
     // give SD card time to power up
     _delay_ms(1);
 
-    // select SD card
-    SPI_transfer(0xFF);
-    CS_ENABLE();
-
-    // send 74 clock cycles to synchronize
-    for(uint8_t i = 0; i < 74; i++)
+    // send 80 clock cycles to synchronize
+    for(uint8_t i = 0; i < 10; i++)
         SPI_transfer(0xFF);
 
     // deselect SD card
