@@ -8,13 +8,13 @@ Edit the makefile and change MCU to the microcontroller you are using, and AVRDU
 Type 'make' to build:
 ```
 Compiling: main.c
-avr-gcc -c -mmcu=atmega328p -I. -DF_CPU=16000000UL  -Os -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums 
--Wall -Wstrict-prototypes -Wa,-adhlns=main.lst  -std=gnu99 main.c -o main.o
+avr-gcc -c -mmcu=atmega328p -I. -DF_CPU=16000000UL  -Os -funsigned-char -funsigned-bitfields -fpack-struct 
+-fshort-enums -Wall -Wstrict-prototypes -Wa,-adhlns=main.lst  -std=gnu99 main.c -o main.o
 
 Linking: main.elf
 avr-gcc -mmcu=atmega328p -I. -DF_CPU=16000000UL  -Os 
--funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -Wall -Wstrict-prototypes -Wa,-adhlns=main.o  
--std=gnu99 main.o --output main.elf -Wl,-Map=main.map,--cref
+-funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -Wall -Wstrict-prototypes -Wa,
+-adhlns=main.o -std=gnu99 main.o --output main.elf -Wl,-Map=main.map,--cref
 
 Creating load file for Flash: main.hex
 avr-objcopy -O ihex -R .eeprom main.elf main.hex
