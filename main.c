@@ -77,10 +77,6 @@ void SD_powerUpSeq()
     // send 80 clock cycles to synchronize
     for(uint8_t i = 0; i < 10; i++)
         SPI_transfer(0xFF);
-
-    // deselect SD card
-    CS_DISABLE();
-    SPI_transfer(0xFF);
 }
 
 void SD_command(uint8_t cmd, uint32_t arg, uint8_t crc)
